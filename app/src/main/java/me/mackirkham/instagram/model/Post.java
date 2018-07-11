@@ -57,6 +57,11 @@ public class Post extends ParseObject {
             return this;
         }
 
+        public Query loadInOrder() {
+            orderByAscending("createdAt");
+            return this;
+        }
+
     }
 
 

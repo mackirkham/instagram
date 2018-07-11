@@ -16,14 +16,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
 
 import me.mackirkham.instagram.model.Post;
 
@@ -76,13 +74,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadTopPosts();
-            }
-        });
-
     }
 
     private void createPost(String description, ParseFile imageFile, ParseUser user) {
@@ -96,29 +87,10 @@ public class HomeActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     Log.d("HomeAvtivity", "Create post success!");
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
 
-    }
-
-    private void loadTopPosts() {
-
-        final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
-
-        postQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e==null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                +"\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-
+                    Intent i = new Intent(HomeActivity.this, TimelineActivity.class);
+                    i.putExtra("post", newPost);
+                    startActivity(i);
                 } else {
                     e.printStackTrace();
                 }

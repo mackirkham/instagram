@@ -27,6 +27,13 @@
 
         </activity>
 
+        <activity
+            android:name=".TimelineActivity"
+            android:label="TimelineActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
         <provider
             android:name="android.support.v4.content.FileProvider"
