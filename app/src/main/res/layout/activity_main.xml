@@ -3,31 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password_et"
-        android:layout_centerHorizontal="true"
-        android:text="Log in" />
 
-    <EditText
-        android:id="@+id/username_et"
-        android:layout_width="212dp"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="137dp"
-        android:hint="Username" />
+        android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/password_et"
-        android:layout_width="228dp"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="202dp"
-        android:hint="Password" />
+        app:menu="@menu/menu_bottom_navigation" />
+
+
+
 </RelativeLayout>

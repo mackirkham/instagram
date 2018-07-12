@@ -1,44 +1,69 @@
 package me.mackirkham.instagram;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
+public class CameraFragment extends Fragment {
 
-import java.io.File;
+        // The onCreateView method is called when Fragment should create its View object hierarchy,
+        // either dynamically or via XML layout inflation.
 
-import me.mackirkham.instagram.model.Post;
+        ImageView ivPhoto;
 
-public class HomeActivity extends AppCompatActivity {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+            // Defines the xml file for the fragment
+            View v = inflater.inflate(R.layout.fragment_camera, parent, false);
+            ivPhoto = v.findViewById(R.id.image_iv);
+            return v;
+        }
 
-    private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180710_144648.jpg";
-    private EditText descriptionInput;
-    private Button createButton;
-    private Button refreshButton;
-    private Button takePictureButton;
+        // This event is triggered soon after onCreateView().
+        // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            // Setup any handles to view objects here
+            // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        }
+    }
 
-    public final String APP_TAG = "MyCustomApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-    File photoFile;
 
-    @Override
+
+
+
+
+    /*private void createPost(String description, ParseFile imageFile, ParseUser user) {
+        final Post newPost = new Post();
+        newPost.setDescription(description);
+        newPost.setImage(imageFile);
+        newPost.setUser(user);
+
+        newPost.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("HomeAvtivity", "Create post success!");
+
+                    Intent i = new Intent(this, CameraFragment.class);
+                    i.putExtra("post", newPost);
+                    startActivity(i);
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }*/
+
+
+
+
+
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -155,7 +180,5 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 
-
-}
