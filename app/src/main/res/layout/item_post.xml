@@ -7,11 +7,13 @@
 
     <ImageView
         android:id="@+id/ivPicture"
-        android:layout_width="215dp"
-        android:layout_height="207dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="69dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:srcCompat="@android:color/black"
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="36dp" />
@@ -22,7 +24,8 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="152dp" />
+        android:layout_marginBottom="89dp"
+        />
 
     <TextView
         android:id="@+id/tvUserName"
@@ -30,5 +33,5 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/ivPicture"
         android:layout_alignStart="@+id/ivPicture"
-        android:layout_marginBottom="-46dp" />
+        android:layout_marginBottom="-69dp" />
 </RelativeLayout>
