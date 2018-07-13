@@ -11,12 +11,14 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput;
     private EditText passwordInput;
     private Button loginBtn;
+    private Button signupBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameInput = findViewById(R.id.username_et);
         passwordInput = findViewById(R.id.password_et);
         loginBtn = findViewById(R.id.login_btn);
+        signupBtn = findViewById(R.id.signup_btn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,17 @@ public class LoginActivity extends AppCompatActivity {
                 final String password = passwordInput.getText().toString();
 
                 login(username, password);
+
+            }
+        });
+
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String username = usernameInput.getText().toString();
+                final String password = passwordInput.getText().toString();
+
+                signup(username, password);
 
             }
         });
@@ -56,6 +70,30 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void signup(String username, String password) {
+        final String name = username;
+        final String pass = password;
+        // Create the ParseUser
+        ParseUser user = new ParseUser();
+        // Set core properties
+        user.setUsername(username);
+        user.setPassword(password);
+        // Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                    login(name, pass);
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 }
