@@ -20,6 +20,23 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private Button signupBtn;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+            // show the signup or login screen
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void login(String username, String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {

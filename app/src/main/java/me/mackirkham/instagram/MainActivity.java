@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction.replace(R.id.flContainer, fragment1).commit();
                                 return true;
                             case R.id.action_camera:
+
                                 fragmentTransaction.replace(R.id.flContainer, fragment2).commit();
                                 onLaunchCamera();
                                 return true;

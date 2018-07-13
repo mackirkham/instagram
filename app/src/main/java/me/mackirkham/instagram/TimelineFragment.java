@@ -14,7 +14,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import me.mackirkham.instagram.model.Post;
@@ -67,7 +66,6 @@ public class TimelineFragment extends Fragment {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     posts.addAll(objects);
-                    Collections.reverse(posts);
                     instaAdapter.notifyDataSetChanged();
 
                 } else {
