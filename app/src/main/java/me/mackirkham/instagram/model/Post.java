@@ -1,5 +1,7 @@
 package me.mackirkham.instagram.model;
 
+import android.text.format.DateUtils;
+
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -39,6 +41,10 @@ public class Post extends ParseObject {
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
+    }
+
+    public String getRelativeTimeAgo() {
+        return DateUtils.getRelativeTimeSpanString(getCreatedAt().getTime(), System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
     }
 
     //inner class on the post, querying the post models

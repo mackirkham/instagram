@@ -23,15 +23,37 @@ public class TimelineFragment extends Fragment {
     private Button refreshButton;
     InstaAdapter instaAdapter;
     ArrayList<Post> posts;
+
     RecyclerView rvPosts;
-    SwipeRefreshLayout swipeLayout;
+    private SwipeRefreshLayout swipeContainer;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timeline, null);
-        //find RecyclerView
+
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
+    //find RecyclerView
         rvPosts = (RecyclerView) view.findViewById(R.id.rvPost);
         posts = new ArrayList<>();
         //construct the adapter from this datasource
@@ -75,6 +97,28 @@ public class TimelineFragment extends Fragment {
         });
 
     }
+
+    public void fetchTimelineAsync(int page) {
+
+        final Post.Query postQuery = new Post.Query();
+        postQuery.getTop().withUser();
+
+        postQuery.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> objects, ParseException e) {
+                if (e == null) {
+                    posts.clear();
+                    posts.addAll(objects);
+                    instaAdapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
+
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
 
 

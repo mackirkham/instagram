@@ -25,6 +25,19 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
     }
 
 
+    // Clean all elements of the recycler
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        mPosts.addAll(list);
+        notifyDataSetChanged();
+    }
+
+
     //for each row, inflate the layout catch reference into viewholder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,7 +57,7 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
         //populate the views according to data
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvDescription.setText(post.getDescription());
-        //holder.tvTimeStamp.setText(getRelativeTimeAgo(tweet.createdAt));
+        holder.tvTimeStamp.setText(post.getRelativeTimeAgo());
 
         Glide.with(context).load(post.getImage().getUrl()).into(holder.ivPicture);
     }
@@ -69,6 +82,7 @@ public class InstaAdapter extends RecyclerView.Adapter<InstaAdapter.ViewHolder> 
             ivPicture = itemView.findViewById(R.id.ivPicture);
             tvUsername = itemView.findViewById(R.id.tvUserName);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
 
         }
     }
